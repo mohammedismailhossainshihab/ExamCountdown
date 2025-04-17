@@ -7,6 +7,7 @@ function updateCountdown() {
   const examTime = localStorage.getItem("examTime");
   if (!examTime) {
     countdownEl.innerText = "Please set your exam time.";
+    document.title = "Exam Countdown Timer";
     return;
   }
 
@@ -16,6 +17,7 @@ function updateCountdown() {
 
   if (diff <= 0) {
     countdownEl.innerText = "🚨 The exam time has started!";
+    document.title = "🚨 Exam Time!";
     return;
   }
 
@@ -24,8 +26,11 @@ function updateCountdown() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  countdownEl.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+  const timeString = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+  countdownEl.innerText = timeString;
+  document.title = timeString;
 }
+
 
 setTimeBtn.addEventListener("click", () => {
   const selectedDate = examDateTimeInput.value;
